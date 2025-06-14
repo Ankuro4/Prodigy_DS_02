@@ -485,3 +485,33 @@ Perform data cleaning and exploratory data analysis (EDA) on a dataset of your c
               "      <th>max</th>\n",
               "      <td>891.000000</td>\n",
               "      <td>1.000000</td>\n",
+
+
+              # titanic_eda.py
+
+# 📦 Import Libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 🔗 Load Dataset (Titanic sample dataset from seaborn)
+# If you're using your own CSV, replace the line below with: pd.read_csv('filename.csv')
+titanic = sns.load_dataset('titanic')
+
+# 🧼 Drop rows with missing 'age' or 'fare' for this simple demo
+titanic.dropna(subset=['age', 'fare'], inplace=True)
+
+# 📊 Basic Description
+print("📈 Dataset Summary:")
+print(titanic.describe())
+
+# 🔍 Distribution Plot - Age
+plt.figure(figsize=(10, 6))
+sns.histplot(data=titanic, x='age', bins=30, kde=True, color='skyblue')
+plt.title("Distribution of Passenger Ages on Titanic", fontsize=14)
+plt.xlabel("Age")
+plt.ylabel("Count")
+plt.grid(True)
+plt.tight_layout()
+plt.savefig("age_distribution.png")  # Saves chart to local file (for GitHub preview)
+plt.show()
